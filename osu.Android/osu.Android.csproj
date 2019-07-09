@@ -31,6 +31,10 @@
       <Project>{58f6c80c-1253-4a0e-a465-b8c85ebeadf3}</Project>
       <Name>osu.Game.Rulesets.Catch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\osu.Game.Rulesets.Jubeatsu\osu.Game.Rulesets.Jubeatsu.csproj">
+      <Project>{c91434fa-176a-4613-83aa-782bf7edd065}</Project>
+      <Name>osu.Game.Rulesets.Jubeatsu</Name>
+    </ProjectReference>
     <ProjectReference Include="..\osu.Game.Rulesets.Mania\osu.Game.Rulesets.Mania.csproj">
       <Project>{48f4582b-7687-4621-9cbe-5c24197cb536}</Project>
       <Name>osu.Game.Rulesets.Mania</Name>
