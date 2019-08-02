@@ -18,7 +18,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Beatmaps
         {
         }
 
-        protected override IEnumerable<Type> ValidConversionTypes => new[] { typeof(IHasPosition), typeof(IHasEndTime) };
+        protected override IEnumerable<Type> ValidConversionTypes => new[] { typeof(IHasPosition) };
 
         protected override IEnumerable<JubeatsuHitObject> ConvertHitObject(HitObject original, IBeatmap beatmap)
         {

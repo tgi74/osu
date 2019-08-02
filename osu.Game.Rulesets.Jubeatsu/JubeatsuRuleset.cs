@@ -19,9 +19,8 @@ namespace osu.Game.Rulesets.Jubeatsu
 {
     public class JubeatsuRuleset : Ruleset
     {
-        public override string ShortName => "Jubeatsu";
+        public override string ShortName => "jubeatsu";
         public override string Description => "Jubeatsu";
-        public override int? LegacyID => 4;
 
         public override Drawable CreateIcon() => new SpriteIcon { Icon = FontAwesome.Solid.ShareSquare };
 

@@ -19,7 +19,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Beatmaps
         {
             var jubeatsuBeatmap = (Beatmap<JubeatsuHitObject>)Beatmap;
 
-            if (jubeatsuBeatmap.BeatmapInfo.Ruleset == new JubeatsuRuleset().RulesetInfo)
+            if (jubeatsuBeatmap.BeatmapInfo.Ruleset.Equals(new JubeatsuRuleset().RulesetInfo))
                 return;
 
             foreach (var hit in jubeatsuBeatmap.HitObjects)
