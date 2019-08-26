@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Colour;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input.Bindings;
@@ -35,12 +36,23 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
             Anchor.BottomLeft,
         };
 
+        private readonly Container hittableContainer;
+        private readonly Container afterHitContainer;
         private readonly List<Box> boxes = new List<Box>();
         private readonly List<SpriteText> touchTexts = new List<SpriteText>();
 
         public DrawableJubeatsuBox(JubeatsuHitObject hit)
             : base(hit)
         {
+            ContentContainer.AddInternal(hittableContainer = new Container
+            {
+                RelativeSizeAxes = Axes.Both,
+                RelativePositionAxes = Axes.Both,
+                Size = new Vector2(1),
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre
+            });
+
             for (int i = 0; i < 4; i++)
             {
                 var b = new Box
@@ -54,7 +66,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
                     Anchor = Anchor.Centre
                 };
                 boxes.Add(b);
-                ContentContainer.AddInternal(b);
+                hittableContainer.Add(b);
             }
 
             for (int i = 0; i < 2; i++)
@@ -70,7 +82,32 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
                     Alpha = 0
                 };
                 touchTexts.Add(text);
-                AddInternal(text);
+                hittableContainer.Add(text);
+            }
+
+            ContentContainer.AddInternal(afterHitContainer = new Container
+            {
+                Colour = ColourInfo.GradientVertical(Color4.Orange, Color4.OrangeRed),
+                RelativeSizeAxes = Axes.Both,
+                RelativePositionAxes = Axes.Both,
+                Size = new Vector2(1),
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Alpha = 0
+            });
+
+            for (int i = 0; i < 4; i++)
+            {
+                var b = new Box
+                {
+                    RelativeSizeAxes = Axes.Both,
+                    RelativePositionAxes = Axes.Both,
+                    Size = new Vector2(1),
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre,
+                    Rotation = 22.5f * i
+                };
+                afterHitContainer.Add(b);
             }
         }
 
@@ -118,12 +155,14 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
                     break;
 
                 case ArmedState.Hit:
-                    this.FadeOut().Then().Expire();
+                    this.Delay(1000).Expire();
+                    hittableContainer.FadeOut(200);
+                    afterHitContainer.FadeTo(0.5f, 100).RotateTo(22.5f, 500).Delay(100).FadeOut(200);
+
                     break;
 
                 case ArmedState.Miss:
-                    this.FlashColour(Color4.Red, 200, Easing.InBounce);
-                    this.FadeOut(200).Then().Expire();
+                    this.FlashColour(Color4.Red, 200, Easing.InBounce).FadeOut(200).Then().Expire();
                     break;
             }
         }
