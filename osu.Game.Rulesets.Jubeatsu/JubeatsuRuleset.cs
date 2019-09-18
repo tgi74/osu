@@ -22,7 +22,7 @@ namespace osu.Game.Rulesets.Jubeatsu
         public override string ShortName => "jubeatsu";
         public override string Description => "Jubeatsu";
 
-        public override Drawable CreateIcon() => new SpriteIcon { Icon = FontAwesome.Solid.ShareSquare };
+        public override Drawable CreateIcon() => new SpriteIcon { Icon = FontAwesome.Solid.Th };
 
         public JubeatsuRuleset(RulesetInfo info = null)
             : base(info)
