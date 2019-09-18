@@ -17,7 +17,7 @@ namespace osu.Game.Rulesets.Jubeatsu.UI
 {
     public class JubeatsuDrawableRuleset : DrawableRuleset<JubeatsuHitObject>
     {
-        public JubeatsuDrawableRuleset(Ruleset ruleset, WorkingBeatmap workingBeatmap, IReadOnlyList<Mod> mods)
+        public JubeatsuDrawableRuleset(Ruleset ruleset, IWorkingBeatmap workingBeatmap, IReadOnlyList<Mod> mods)
             : base(ruleset, workingBeatmap, mods)
         {
         }

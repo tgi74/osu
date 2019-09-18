@@ -43,7 +43,7 @@ namespace osu.Game.Rulesets.Jubeatsu
             return new Mod[] { };
         }
 
-        public override DrawableRuleset CreateDrawableRulesetWith(WorkingBeatmap beatmap, IReadOnlyList<Mod> mods) => new JubeatsuDrawableRuleset(this, beatmap, mods);
+        public override DrawableRuleset CreateDrawableRulesetWith(IWorkingBeatmap beatmap, IReadOnlyList<Mod> mods) => new JubeatsuDrawableRuleset(this, beatmap, mods);
 
         public override IBeatmapConverter CreateBeatmapConverter(IBeatmap beatmap) => new JubeatsuBeatmapConverter(beatmap);
 

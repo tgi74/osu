@@ -26,7 +26,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Replays
             Actions.AddRange(actions);
         }
 
-        public void ConvertFrom(LegacyReplayFrame legacyFrame, IBeatmap beatmap)
+        public void ConvertFrom(LegacyReplayFrame legacyFrame, IBeatmap beatmap, ReplayFrame lastFrame = null)
         {
             Position = legacyFrame.Position;
             if (legacyFrame.MouseLeft || legacyFrame.MouseRight) Actions.Add(JubeatsuAction.Hit);

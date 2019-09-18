@@ -40,6 +40,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
             RelativeSizeAxes = Axes.Both;
         }
 
+        [Obsolete("Use UpdateInitialTransforms()/UpdateStateTransforms() instead")]
         protected sealed override void UpdateState(ArmedState state)
         {
             double transformTime = HitObject.StartTime - HitObject.TimePreempt;
@@ -51,7 +52,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
             {
                 UpdatePreemptState();
 
-                var judgementOffset = Math.Min(HitObject.HitWindows.HalfWindowFor(HitResult.Miss), Result?.TimeOffset ?? 0);
+                var judgementOffset = Math.Min(HitObject.HitWindows?.WindowFor(HitResult.Miss) ?? 0, Result?.TimeOffset ?? 0);
 
                 using (BeginDelayedSequence(HitObject.TimePreempt + judgementOffset, true))
                     UpdateCurrentState(state);
