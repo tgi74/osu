@@ -25,6 +25,9 @@ namespace osu.Game.Rulesets.Jubeatsu.Beatmaps
             if (!(original is IHasPosition position))
                 yield break;
 
+            if (!(original is IHasCurve) && original is IHasEndTime)
+                yield break;
+
             yield return new JubeatsuHitObject
             {
                 StartTime = original.StartTime,
