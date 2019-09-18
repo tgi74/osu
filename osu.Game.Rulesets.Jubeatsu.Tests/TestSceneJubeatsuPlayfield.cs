@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Primitives;
 using osu.Game.Beatmaps;
 using osu.Game.Beatmaps.ControlPoints;
 using osu.Game.Rulesets.Jubeatsu.Objects;
@@ -24,12 +23,13 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
         public override IReadOnlyList<Type> RequiredTypes => new[]
         {
             typeof(JubeatsuDrawableGrid),
+            typeof(DrawableJubeatsuHitObject),
             typeof(DrawableJubeatsuBox),
         };
 
         private Container playfieldContainer;
         private JubeatsuDrawableRuleset drawableRuleset;
-        private Random random = new Random(74000);
+        private readonly Random random = new Random(74000);
 
         [BackgroundDependencyLoader]
         private void load()
@@ -39,7 +39,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
 
             WorkingBeatmap beatmap = CreateWorkingBeatmap(new Beatmap
             {
-                HitObjects = new List<HitObject> { new JubeatsuHitObject(new Vector2I(1, 1)) },
+                HitObjects = new List<HitObject> { new JubeatsuHitObject() },
                 BeatmapInfo = new BeatmapInfo
                 {
                     BaseDifficulty = new BeatmapDifficulty(),
@@ -68,7 +68,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
 
         private void addObject()
         {
-            addObject(random.Next(5) / 4f, random.Next(5) / 4f);
+            addObject(random.Next(4) / 4f, random.Next(4) / 4f);
         }
 
         private void addObject(float x, float y, float whenInTheFuture = 1000)

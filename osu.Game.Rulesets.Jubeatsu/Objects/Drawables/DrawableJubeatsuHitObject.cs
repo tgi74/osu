@@ -1,18 +1,16 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
-using System;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Rulesets.Objects.Drawables;
-using osu.Game.Rulesets.Scoring;
 using osuTK;
 
 namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
 {
     public abstract class DrawableJubeatsuHitObject : DrawableHitObject<JubeatsuHitObject>
     {
-        public override double LifetimeStart => HitObject.StartTime - HitObject.TimePreempt;
+        protected sealed override double InitialLifetimeOffset => HitObject.TimePreempt;
         protected readonly AnimationContainer ContentContainer;
 
         public float ContentSize
@@ -40,37 +38,17 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
             RelativeSizeAxes = Axes.Both;
         }
 
-        [Obsolete("Use UpdateInitialTransforms()/UpdateStateTransforms() instead")]
-        protected sealed override void UpdateState(ArmedState state)
+        protected override void UpdateStateTransforms(ArmedState state)
         {
-            double transformTime = HitObject.StartTime - HitObject.TimePreempt;
+            base.UpdateStateTransforms(state);
 
-            base.ApplyTransformsAt(transformTime, true);
-            base.ClearTransformsAfter(transformTime, true);
-
-            using (BeginAbsoluteSequence(transformTime, true))
+            switch (state)
             {
-                UpdatePreemptState();
-
-                var judgementOffset = Math.Min(HitObject.HitWindows?.WindowFor(HitResult.Miss) ?? 0, Result?.TimeOffset ?? 0);
-
-                using (BeginDelayedSequence(HitObject.TimePreempt + judgementOffset, true))
-                    UpdateCurrentState(state);
+                case ArmedState.Idle:
+                    // Manually set to reduce the number of future alive objects to a bare minimum.
+                    LifetimeStart = HitObject.StartTime - HitObject.TimePreempt;
+                    break;
             }
-        }
-
-        protected virtual void UpdatePreemptState() => this.FadeIn(HitObject.TimeFadeIn);
-
-        protected virtual void UpdateCurrentState(ArmedState state)
-        {
-        }
-
-        public override void ClearTransformsAfter(double time, bool propagateChildren = false, string targetMember = null)
-        {
-        }
-
-        public override void ApplyTransformsAt(double time, bool propagateChildren = false)
-        {
         }
 
         protected class AnimationContainer : CompositeDrawable
