@@ -33,6 +33,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
             Alpha = 0;
 
             Position = hit.Position;
+            FillMode = FillMode.Fit;
 
             RelativePositionAxes = Axes.Both;
             RelativeSizeAxes = Axes.Both;
