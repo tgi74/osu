@@ -27,7 +27,6 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
             typeof(DrawableJubeatsuBox),
         };
 
-        private Container playfieldContainer;
         private JubeatsuDrawableRuleset drawableRuleset;
         private readonly Random random = new Random(74000);
 
@@ -54,7 +53,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
                 ControlPointInfo = controlPointInfo
             });
 
-            Add(playfieldContainer = new Container
+            Add(new Container
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -81,7 +80,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
 
             h.ApplyDefaults(new ControlPointInfo(), new BeatmapDifficulty());
 
-            drawableRuleset.Playfield.Add(new DrawableJubeatsuBox(h));
+            drawableRuleset.Playfield.Add(new TestJubeatsuBox(h));
         }
 
         private void addMultipleObjects()
