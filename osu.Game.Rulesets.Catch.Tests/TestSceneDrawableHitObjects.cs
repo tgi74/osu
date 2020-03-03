@@ -10,7 +10,7 @@ using osu.Framework.Graphics.Containers;
 using osu.Game.Beatmaps;
 using osu.Game.Beatmaps.ControlPoints;
 using osu.Game.Rulesets.Catch.Objects;
-using osu.Game.Rulesets.Catch.Objects.Drawable;
+using osu.Game.Rulesets.Catch.Objects.Drawables;
 using osu.Game.Rulesets.Catch.UI;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects;
@@ -38,7 +38,7 @@ namespace osu.Game.Rulesets.Catch.Tests
         private void load()
         {
             var controlPointInfo = new ControlPointInfo();
-            controlPointInfo.TimingPoints.Add(new TimingControlPoint());
+            controlPointInfo.Add(0, new TimingControlPoint());
 
             WorkingBeatmap beatmap = CreateWorkingBeatmap(new Beatmap
             {
@@ -64,7 +64,7 @@ namespace osu.Game.Rulesets.Catch.Tests
                 RelativeSizeAxes = Axes.Both,
                 Children = new[]
                 {
-                    drawableRuleset = new DrawableCatchRuleset(new CatchRuleset(), beatmap, Array.Empty<Mod>())
+                    drawableRuleset = new DrawableCatchRuleset(new CatchRuleset(), beatmap.GetPlayableBeatmap(new CatchRuleset().RulesetInfo))
                 }
             });
 
@@ -151,7 +151,7 @@ namespace osu.Game.Rulesets.Catch.Tests
 
         private void addToPlayfield(DrawableCatchHitObject drawable)
         {
-            foreach (var mod in Mods.Value.OfType<IApplicableToDrawableHitObjects>())
+            foreach (var mod in SelectedMods.Value.OfType<IApplicableToDrawableHitObjects>())
                 mod.ApplyToDrawableHitObjects(new[] { drawable });
 
             drawableRuleset.Playfield.Add(drawable);

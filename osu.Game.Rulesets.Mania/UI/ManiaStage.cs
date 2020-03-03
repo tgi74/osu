@@ -12,7 +12,6 @@ using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Mania.Beatmaps;
 using osu.Game.Rulesets.Mania.Objects;
 using osu.Game.Rulesets.Mania.Objects.Drawables;
-using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.UI;
 using osu.Game.Rulesets.UI.Scrolling;
@@ -116,9 +115,8 @@ namespace osu.Game.Rulesets.Mania.UI
                         {
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.Centre,
-                            AutoSizeAxes = Axes.Both,
+                            RelativeSizeAxes = Axes.Both,
                             Y = HIT_TARGET_POSITION + 150,
-                            BypassAutoSizeAxes = Axes.Both
                         },
                         topLevelContainer = new Container { RelativeSizeAxes = Axes.Both }
                     }
