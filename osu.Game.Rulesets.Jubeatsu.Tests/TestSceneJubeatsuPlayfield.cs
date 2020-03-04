@@ -34,7 +34,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
         private void load()
         {
             var controlPointInfo = new ControlPointInfo();
-            controlPointInfo.TimingPoints.Add(new TimingControlPoint());
+            controlPointInfo.Add(0, new TimingControlPoint());
 
             WorkingBeatmap beatmap = CreateWorkingBeatmap(new Beatmap
             {
@@ -58,7 +58,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Tests
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 RelativeSizeAxes = Axes.Both,
-                Children = new[] { drawableRuleset = new JubeatsuDrawableRuleset(new JubeatsuRuleset(), beatmap, Array.Empty<Mod>()) }
+                Children = new[] { drawableRuleset = new JubeatsuDrawableRuleset(new JubeatsuRuleset(), beatmap.GetPlayableBeatmap(new JubeatsuRuleset().RulesetInfo), Array.Empty<Mod>()) }
             });
 
             AddStep("Add Object", addObject);
