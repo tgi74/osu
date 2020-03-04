@@ -1,3 +1,4 @@
+using System;
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
@@ -24,8 +25,8 @@ namespace osu.Game.Rulesets.Jubeatsu
 
         public override Drawable CreateIcon() => new SpriteIcon { Icon = FontAwesome.Solid.Th };
 
-        public JubeatsuRuleset(RulesetInfo info = null)
-            : base(info)
+        public JubeatsuRuleset()
+            : base()
         {
         }
 
@@ -40,12 +41,12 @@ namespace osu.Game.Rulesets.Jubeatsu
                     };
             }
 
-            return new Mod[] { };
+            return Array.Empty<Mod>();
         }
 
-        public override DrawableRuleset CreateDrawableRulesetWith(IWorkingBeatmap beatmap, IReadOnlyList<Mod> mods) => new JubeatsuDrawableRuleset(this, beatmap, mods);
+        public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods) => new JubeatsuDrawableRuleset(this, beatmap, mods);
 
-        public override IBeatmapConverter CreateBeatmapConverter(IBeatmap beatmap) => new JubeatsuBeatmapConverter(beatmap);
+        public override IBeatmapConverter CreateBeatmapConverter(IBeatmap beatmap) => new JubeatsuBeatmapConverter(beatmap, this);
 
         public override IBeatmapProcessor CreateBeatmapProcessor(IBeatmap beatmap) => new JubeatsuBeatmapProcessor(beatmap);
 

@@ -12,6 +12,7 @@ using osu.Framework.Input.Bindings;
 using osu.Framework.Localisation;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
+using osu.Game.Graphics.Sprites;
 using osuTK;
 using osuTK.Graphics;
 
@@ -72,7 +73,7 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
 
             for (int i = 0; i < 2; i++)
             {
-                var text = new SpriteText
+                var text = new OsuSpriteText
                 {
                     Text = new LocalisedString("TOUCH"),
                     Anchor = Anchor.Centre,
@@ -192,6 +193,8 @@ namespace osu.Game.Rulesets.Jubeatsu.Objects.Drawables
             return false;
         }
 
-        public bool OnReleased(JubeatsuAction action) => false;
+        public void OnReleased(JubeatsuAction action) {
+
+        }
     }
 }

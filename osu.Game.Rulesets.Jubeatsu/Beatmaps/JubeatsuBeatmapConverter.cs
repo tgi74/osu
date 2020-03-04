@@ -7,18 +7,19 @@ using osu.Game.Beatmaps;
 using osu.Game.Rulesets.Jubeatsu.Objects;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Types;
+using System.Linq;
 using osuTK;
 
 namespace osu.Game.Rulesets.Jubeatsu.Beatmaps
 {
     public class JubeatsuBeatmapConverter : BeatmapConverter<JubeatsuHitObject>
     {
-        public JubeatsuBeatmapConverter(IBeatmap beatmap)
-            : base(beatmap)
+        public JubeatsuBeatmapConverter(IBeatmap beatmap, Ruleset ruleset)
+            : base(beatmap, ruleset)
         {
         }
 
-        protected override IEnumerable<Type> ValidConversionTypes => new[] { typeof(IHasPosition) };
+        public override bool CanConvert() => Beatmap.HitObjects.All(h => h is IHasPosition);
 
         protected override IEnumerable<JubeatsuHitObject> ConvertHitObject(HitObject original, IBeatmap beatmap)
         {
